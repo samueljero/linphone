@@ -5866,7 +5866,6 @@ int linphone_core_get_video_dscp(const LinphoneCore *lc){
 	return lp_config_get_int(lc->config,"rtp","video_dscp",0x2e);
 }
 
-
 /**
  * Sets the database filename where chat messages will be stored.
  * If the file does not exist, it will be created.
@@ -5885,4 +5884,18 @@ void linphone_core_set_chat_database_path(LinphoneCore *lc, const char *path){
 	}
 }
 
+void linphone_core_set_dccp(const LinphoneCore *lc, bool_t val){
+	return lp_config_set_int(lc->config,"rtp", "dccp", val);
+}
 
+bool_t linphone_core_get_dccp(const LinphoneCore *lc){
+	return lp_config_get_int(lc->config,"rtp", "dccp", 0);
+}
+
+void linphone_core_set_ccid(const LinphoneCore *lc, int val){
+	return lp_config_set_int(lc->config,"rtp", "ccid", val);
+}
+
+int linphone_core_get_ccid(const LinphoneCore *lc){
+	return lp_config_get_int(lc->config,"rtp", "ccid", 3);
+}
