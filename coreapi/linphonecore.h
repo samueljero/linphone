@@ -1531,6 +1531,11 @@ int linphone_core_get_audio_dscp(const LinphoneCore *lc);
 void linphone_core_set_video_dscp(LinphoneCore *lc, int dscp);
 int linphone_core_get_video_dscp(const LinphoneCore *lc);
 
+void linphone_core_set_dccp(const LinphoneCore *lc, bool_t val);
+bool_t linphone_core_get_dccp(const LinphoneCore *lc);
+
+void linphone_core_set_ccid(const LinphoneCore *lc, int val);
+int linphone_core_get_ccid(const LinphoneCore *lc);
 
 #ifdef __cplusplus
 }
