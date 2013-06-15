@@ -1198,7 +1198,9 @@ void linphone_call_init_audio_stream(LinphoneCall *call){
 	int dscp;
 
 	if (call->audiostream != NULL) return;
-	call->audiostream=audiostream=audio_stream_new(call->audio_port,call->audio_port+1,linphone_core_ipv6_enabled(lc));
+	call->audiostream=audiostream=audio_stream_new(call->audio_port,call->audio_port+1,
+										linphone_core_ipv6_enabled(lc),linphone_core_get_dccp(lc),
+										linphone_core_get_ccid(lc));
 	dscp=linphone_core_get_audio_dscp(lc);
 	if (dscp!=-1)
 		audio_stream_set_dscp(audiostream,dscp);
@@ -1260,8 +1262,9 @@ void linphone_call_init_video_stream(LinphoneCall *call){
 	if ((lc->video_conf.display || lc->video_conf.capture) && call->params.has_video){
 		int video_recv_buf_size=lp_config_get_int(lc->config,"video","recv_buf_size",0);
 		int dscp=linphone_core_get_video_dscp(lc);
-		
-		call->videostream=video_stream_new(call->video_port,call->video_port+1,linphone_core_ipv6_enabled(lc));
+		call->videostream=video_stream_new(call->video_port,call->video_port+1,
+										linphone_core_ipv6_enabled(lc),linphone_core_get_dccp(lc),
+										linphone_core_get_ccid(lc));
 		if (dscp!=-1)
 			video_stream_set_dscp(call->videostream,dscp);
 		video_stream_enable_display_filter_auto_rotate(call->videostream, lp_config_get_int(lc->config,"video","display_filter_auto_rotate",0));
